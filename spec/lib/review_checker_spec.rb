@@ -16,7 +16,4 @@ RSpec.describe ReviewChecker do
 
         it ' '
 
-    describe 'convert_review_to_object'
-
-    describe 'calculate_review_score'
 end

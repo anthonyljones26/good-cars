@@ -5,6 +5,7 @@ require './lib/review.rb'
 
 class ReviewChecker
     attr_reader :reviews
+
     def initialize
         @reviews = []
     end
@@ -13,7 +14,6 @@ class ReviewChecker
             browser = Watir::Browser.new
             browser.goto url
             browser_html = Nokogiri::HTML(browser.html)
-            #File.open("parsed.txt", "w") { |f| f.write "#{browser_html}" }
             browser.close
         rescue
             browser.close
@@ -29,7 +29,5 @@ class ReviewChecker
             r = Review.new(review)
             @reviews << r
         end
-
-        return page_reviews.count
     end
 end

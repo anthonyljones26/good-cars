@@ -3,25 +3,14 @@ require './lib/review_checker.rb'
 #Create new review checker
 rc = ReviewChecker.new
 
-#scrape first page of reviews
-page1 = rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page1/?filter=#link')
-rc.parse_reviews(page1)
+(1..5).each do |n|
+    page = rc.page_scrape("https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page#{n}/?filter=#link")
+    rc.parse_reviews(page)
+end
 
-#scrape second page of reviews
-page2 = rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page2/?filter=#link')
-rc.parse_reviews(page2)
+#sort the array of review objects by score in descending order
+rc.reviews.sort_by! { |r| -r.score }
 
-#scrape third page of reviews
-page3 = rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page3/?filter=#link')
-rc.parse_reviews(page3)
-
-#scrape fourth page of reviews
-page4 = rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page4/?filter=#link')
-rc.parse_reviews(page4)
-
-#scrape fourth page of reviews
-page5 = rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page5/?filter=#link')
-rc.parse_reviews(page5)
-
-puts rc.reviews.inspect
-
+puts rc.reviews[0].display
+puts rc.reviews[1].display
+puts rc.reviews[2].display
