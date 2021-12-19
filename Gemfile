@@ -1,4 +1,6 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 
 gem 'ffi', '~> 1.15.4'
 gem 'nokogiri', '~> 1.11'
