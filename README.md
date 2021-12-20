@@ -4,6 +4,7 @@ This is a ruby application that displays the top 3 overly positive reviews for M
 
 ## Prerequisites
 * Need internet connection
+* Firefox web browser
 * [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) version 2.7 or higher
 * After installing ruby, [install bundler](https://bundler.io/) version 2.1.2 or higher
 ## Setup
@@ -35,4 +36,6 @@ This is a ruby application that displays the top 3 overly positive reviews for M
     * The text *"GREAT! Customer service!! I would love to come back to buy another amazing car!"*  
     * could be reduced to: `great + love + amazing` which equals `2 + 6 + 3 = 11`  
   * Give the examples above, the total score would be 521  
-    `470 + 40 + 11 = 521` 
+    `470 + 40 + 11 = 521`  
+## Notes  
+* This application has been built and tested on Windows 10 and Ubuntu 18.04 LTS

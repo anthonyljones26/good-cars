@@ -26,7 +26,7 @@ RSpec.describe ReviewChecker do
     it 'successfully processes reviews' do
       rc = ReviewChecker.new
       prev_count = rc.reviews.count
-      browser_html = File.read('spec\fixtures\html\dealerrater_review_page.html')
+      browser_html = File.read('spec/fixtures/html/dealerrater_review_page.html')
       rc.process_reviews(Nokogiri::HTML(browser_html))
 
       expect(rc.reviews.count).to be > prev_count
