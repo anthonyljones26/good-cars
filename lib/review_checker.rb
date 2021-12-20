@@ -3,8 +3,6 @@
 require 'watir'
 require 'webdrivers'
 require 'nokogiri'
-require 'open-uri'
-require 'open_uri_redirections'
 require './lib/review'
 
 # This class scrapes reviews from dealrater.com then puts them in an array of review objects
@@ -18,12 +16,12 @@ class ReviewChecker
   # Scrapes the page of the input url and returns Nokogiri::HTML::Document
   def page_scrape(url)
     begin
-      browser = Watir::Browser.new :chrome, headless: true
+      browser = Watir::Browser.new :firefox, headless: true
       browser.goto url
       browser_html = Nokogiri::HTML(browser.html)
       browser.close
     rescue StandardError
-      browser.close
+      browser&.close
       browser_html = nil
     end
     browser_html
