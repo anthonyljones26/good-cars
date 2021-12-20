@@ -5,9 +5,10 @@ This is a ruby application that displays the top 3 overly positive reviews for M
 ## Prerequisites
 * Need internet connection
 * [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) version 2.7 or higher
-* after installing ruby, [install bundler](https://bundler.io/) version 2.1.2 or higher
+* After installing ruby, [install bundler](https://bundler.io/) version 2.1.2 or higher
 ## Setup
-* run bundle install  
+1. Navigate to project (`cd path/to/project`)  
+2. Run bundle install  
   `bundle install`
 ## Running the application
 1. Navigate to project (`cd path/to/project`)  
