@@ -7,10 +7,8 @@ class Review
 
   def initialize(entry)
     if entry.is_a?(Nokogiri::XML::Element)
-      # find review title text in review entry
+      # find all the review text in review entry
       title = entry.xpath(".//span[contains(@class, 'review-title')]").text
-
-      # find review whole text in review entry
       text = entry.xpath(".//span[contains(@class, 'review-whole')]").text
       @full_text = title + text
 
@@ -40,17 +38,26 @@ class Review
   end
 
   def display
+    puts ''
     puts '###################################################################################'
+    puts "Overly Positive Score: #{@score}"
+    puts '----------------------------------------------------------------------------------'
     puts "Rating: #{@stars / 10} Stars"
     puts '------------------------------------Review----------------------------------------'
     puts @full_text
     puts '###################################################################################'
+    puts ''
   end
 
   def retreive_rating_from_class(entry)
+    # find element with rating info
     rating_element = entry.xpath(".//div[contains(@class, 'rating-static hidden-xs')]")
+    # get rating element's class attributes as a string
     rating_attr_str = rating_element[0].attributes.values[0].to_s
+    # split attribute string into array of substrings
     attr_array = rating_attr_str.split
+    # get the numeric part of the rating class ie: the '50' in 'rating-50'
+    # then convert to integer
     attr_array[2][7, 8].to_i
   end
 

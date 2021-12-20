@@ -3,19 +3,19 @@
 require './lib/review_checker'
 RSpec.describe ReviewChecker do
   describe 'page_scrape' do
-    it 'cannot reach url' do
+    it 'cannot reach invalid url' do
       rc = ReviewChecker.new
       expect(rc.page_scrape('')).to be(nil)
     end
-    it 'reaches url' do
-
+    it 'reaches valid url' do
       rc = ReviewChecker.new
-      expect(rc.page_scrape('https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page1/?filter=#link')).to_not be(nil)
+      valid_url = 'https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page1/?filter=#link'
+      expect(rc.page_scrape(valid_url)).to_not be(nil)
     end
   end
 
   describe 'process_reviews' do
-    it 'cannot process reviews' do
+    it 'cannot process reviews when passed ' do
       rc = ReviewChecker.new
       prev_count = rc.reviews.count
       rc.process_reviews(nil)
@@ -26,12 +26,11 @@ RSpec.describe ReviewChecker do
     it 'successfully processes reviews' do
       rc = ReviewChecker.new
       prev_count = rc.reviews.count
-      browser_html = File.read('spec\fixtures\dealerrater_review_page.html')
-      #entry = Nokogiri::HTML(browser_html)
+      browser_html = File.read('spec\fixtures\html\dealerrater_review_page.html')
       rc.process_reviews(Nokogiri::HTML(browser_html))
 
       expect(rc.reviews.count).to be > prev_count
-      expect(rc.reviews.count).to eq(10) 
+      expect(rc.reviews.count).to eq(10)
     end
   end
 end

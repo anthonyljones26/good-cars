@@ -6,15 +6,16 @@ require './lib/review_checker'
 rc = ReviewChecker.new
 success = true
 
+# Scrape reviews from the first five pages
 (1..5).each do |n|
-  page = rc.page_scrape("https://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page#{n}/?filter=#link")
+  page = rc.page_scrape("http://www.dealerrater.com/dealer/McKaig-Chevrolet-Buick-A-Dealer-For-The-People-dealer-reviews-23685/page#{n}/?filter=#link")
   if page.nil?
     success = false
     break
   end
   rc.process_reviews(page)
 end
-puts rc.reviews.count
+
 if success
   # sort the array of review objects by score in descending order
   rc.reviews.sort_by! { |r| -r.score }

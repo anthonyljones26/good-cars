@@ -15,7 +15,7 @@ RSpec.describe Review do
     end
 
     context 'when input is valid' do
-      entry_html = File.read('spec/fixtures/review_entry_valid.html')
+      entry_html = File.read('spec/fixtures/html/review_entry_valid.html')
       entry = Nokogiri::HTML(entry_html)
       review_entry = entry.xpath("//div[contains(@class, 'review-entry')]")[0]
 
@@ -23,12 +23,12 @@ RSpec.describe Review do
         test_review = Review.new(review_entry)
         expect(test_review.stars).to eq(50)
         expect(test_review.score).to eq(509)
-        expect(test_review.full_text).to eq("We was treated with great respect and have all good things to say about ya'll every one was so nice we no where to go to get our next thank you so much for all you did for use we love our new car")
+        expect(test_review.full_text).to eq(File.read('spec/fixtures/text/full_review.txt'))
       end
     end
 
     context 'when input is valid and html is missing elements' do
-      entry_html = File.read('spec/fixtures/review_entry_parital.html')
+      entry_html = File.read('spec/fixtures/html/review_entry_partial.html')
       entry = Nokogiri::HTML(entry_html)
       review_entry = entry.xpath("//div[contains(@class, 'review-entry')]")[0]
 
@@ -36,7 +36,7 @@ RSpec.describe Review do
         test_review = Review.new(review_entry)
         expect(test_review.stars).to eq(50)
         expect(test_review.score).to eq(506)
-        expect(test_review.full_text).to eq(" things to say about ya'll every one was so nice we no where to go to get our next thank you so much for all you did for use we love our new car")
+        expect(test_review.full_text).to eq(File.read('spec/fixtures/text/partial_review.txt'))
       end
     end
   end
